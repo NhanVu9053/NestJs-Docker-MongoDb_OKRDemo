@@ -9,14 +9,14 @@ export class OkrController {
 
 
 
-    @Get('okrs')
+    @Get('')
      async getOkrs(@Res() res) {
     const okrs = await this.okrService.getOkrs();
     return res.status(HttpStatus.OK).json(okrs);
         }
 
 
-    @Get('okr/:id')
+    @Get(':id')
     async getOkr(@Res() res, @Param('id', new ValidateObjectId()) id) {
     const okr = await this.okrService.getOkr(id);
     if (!okr) {
@@ -25,7 +25,7 @@ export class OkrController {
     return res.status(HttpStatus.OK).json(okr);
     }
 
-    @Post('/okr')
+    @Post('')
     async addOkr(@Res() res, @Body() createOkrDTO: CreateOkrDTO) {
     const newOkr = await this.okrService.addOkr(createOkrDTO);
     return res.status(HttpStatus.OK).json({
@@ -35,7 +35,7 @@ export class OkrController {
     }
 
     // Edit a particular post using ID
-    @Patch('/edit/:id')
+    @Patch(':id')
     async editOkr(
         @Res() res,
         @Param('id', new ValidateObjectId()) id,
@@ -51,7 +51,7 @@ export class OkrController {
         });
     }
     // Delete a post using ID
-    @Delete('/delete/:id')
+    @Delete(':id')
     async deletePost(@Res() res, @Param('id', new ValidateObjectId()) id) {
         const deletedOkr = await this.okrService.deleteOkr(id);
         if (!deletedOkr) {
