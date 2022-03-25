@@ -6,6 +6,11 @@ import { OkrModule } from './okr/okr.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configuration } from './config/configuration';
 import { validationSchema } from './config/validation';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './users/user.module';
+
+
 
 
 @Module({
@@ -29,7 +34,9 @@ import { validationSchema } from './config/validation';
       },
       inject: [ConfigService],
     }),
-    OkrModule ],
+    OkrModule,
+    AuthModule,
+    UserModule ],
   controllers: [AppController],
   providers: [AppService],
 })

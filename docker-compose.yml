@@ -1,16 +1,16 @@
 version: '3.9'
 services:
-  nestjs:
-    container_name: NestBE_container
-    depends_on:
-      - mongo_db
-    restart: always
-    build: .
-    ports:
-      - "3000:3000"   
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+  # nestjs:
+  #   container_name: NestBE_container
+  #   depends_on:
+  #     - mongo_db
+  #   restart: always
+  #   build: .
+  #   ports:
+  #     - "3000:3000"   
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /usr/src/app/node_modules
       
   mongo_db:
     container_name: db_container
