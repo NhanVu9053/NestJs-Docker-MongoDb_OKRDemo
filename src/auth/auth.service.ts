@@ -29,15 +29,14 @@ export class AuthService {
         }
     }
     async signIn(user: User) {
-        const payload = { email: user.email, sub: user._id };
-        console.log('im service');
+        const payload = { email: user.email, sub: user._id };     
         return {
           accessToken: this.jwtService.sign(payload),
         };
       }
     
-    async validateUser(username: string, pass: string): Promise<User> {
-        const user = await this.userModel.findOne({ username });
+    async validateUser(email: string, pass: string): Promise<User> {
+        const user = await this.userModel.findOne({ email });
     
         if (!user) {
           return null;
