@@ -9,6 +9,10 @@ import { validationSchema } from './config/validation';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
+import { KrModule } from './kr/kr.module';
+import { DepartmentModule } from './department/department.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 
 
@@ -36,8 +40,13 @@ import { UserModule } from './users/user.module';
     }),
     OkrModule,
     AuthModule,
-    UserModule ],
+    UserModule,
+    KrModule,
+    DepartmentModule ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,{
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  }],
 })
 export class AppModule {}

@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { Role } from '../entities/role.enum';
     
 export interface User extends Document {
 
@@ -6,5 +7,5 @@ export interface User extends Document {
   readonly password: string;
   readonly fullName: string;
   readonly phoneNumber: string;
-  
+  readonly roles: Role[];
 }

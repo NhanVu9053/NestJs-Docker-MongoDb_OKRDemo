@@ -1,19 +1,14 @@
 import * as mongoose from 'mongoose';
 
-export const OkrSchema = new mongoose.Schema({
+export const DepartmentSchema = new mongoose.Schema({
   name: {
-      type: String,
-     
+      type: String,   
   },
  
-  krs: [{
+  users: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Kr',
+    ref: 'User',
   }],  
   },
     { timestamps: true }
 )
-
-
-
-

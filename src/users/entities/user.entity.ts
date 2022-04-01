@@ -17,6 +17,20 @@ export const UserSchema = new mongoose.Schema({
     phoneNumber: {
         type: String,
         required: true
-    }
-});
+    },
+
+    roles: {
+        type: [String],
+        enum: ['user', 'admin'],
+        default: ['user'],
+    },
+
+    department: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department',
+    },  
+
+    },{ timestamps: true }
+
+    );
    

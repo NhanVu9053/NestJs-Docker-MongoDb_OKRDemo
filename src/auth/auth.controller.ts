@@ -7,19 +7,18 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {};
-   
-
+     
     @Post('/signup')
     async signUp(@Res() res,
-        @Body(ValidationPipe) createUserDTO: CreateUserDTO
-    ): Promise<void> {
+        @Body(ValidationPipe) createUserDTO: CreateUserDTO): Promise<void> {
         const newUser = await this.authService.signUp(createUserDTO);
         return res.status(HttpStatus.OK).json({
             message: 'User has been created successfully!',
             use: newUser,
         })
     }
-
+    
+   
     @UseGuards(LocalAuthGuard)
     @Post('/signin')
     async signIn(@Req() req) {
@@ -27,7 +26,7 @@ export class AuthController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('me')
+    @Get('/me')
     getMe(@Req() req) {
         return req.user;
     }

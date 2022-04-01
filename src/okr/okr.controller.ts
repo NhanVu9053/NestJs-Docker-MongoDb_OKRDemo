@@ -7,27 +7,25 @@ import { OkrService } from './okr.service';
 export class OkrController {
     constructor(private okrService: OkrService) { }
 
-
-
     @Get('')
-     async getOkrs(@Res() res) {
-    const okrs = await this.okrService.getOkrs();
+     async getAll(@Res() res) {
+    const okrs = await this.okrService.getAll();
     return res.status(HttpStatus.OK).json(okrs);
         }
 
 
     @Get(':id')
-    async getOkr(@Res() res, @Param('id', new ValidateObjectId()) id) {
-    const okr = await this.okrService.getOkr(id);
+    async get(@Res() res, @Param('id', new ValidateObjectId()) id) {
+    const okr = await this.okrService.get(id);
     if (!okr) {
-        throw new NotFoundException('Post does not exist!');
+        throw new NotFoundException('Okr does not exist!');
     }
     return res.status(HttpStatus.OK).json(okr);
     }
 
     @Post('')
-    async addOkr(@Res() res, @Body() createOkrDTO: CreateOkrDTO) {
-    const newOkr = await this.okrService.addOkr(createOkrDTO);
+    async create(@Res() res, @Body() createOkrDTO: CreateOkrDTO) {
+    const newOkr = await this.okrService.create(createOkrDTO);
     return res.status(HttpStatus.OK).json({
       message: 'Okr has been created successfully!',
       okr: newOkr,
@@ -36,12 +34,12 @@ export class OkrController {
 
     // Edit a particular post using ID
     @Patch(':id')
-    async editOkr(
+    async edit(
         @Res() res,
         @Param('id', new ValidateObjectId()) id,
         @Body() createOkrDTO: CreateOkrDTO,
     ) {
-        const editedOkr = await this.okrService.editOkr(id, createOkrDTO);
+        const editedOkr = await this.okrService.edit(id, createOkrDTO);
         if (!editedOkr) {
             throw new NotFoundException('Okr does not exist!');
         }
@@ -52,8 +50,8 @@ export class OkrController {
     }
     // Delete a post using ID
     @Delete(':id')
-    async deletePost(@Res() res, @Param('id', new ValidateObjectId()) id) {
-        const deletedOkr = await this.okrService.deleteOkr(id);
+    async delete(@Res() res, @Param('id', new ValidateObjectId()) id) {
+        const deletedOkr = await this.okrService.delete(id);
         if (!deletedOkr) {
             throw new NotFoundException('Okr does not exist!');
         }
